@@ -3,10 +3,8 @@ alias erc='emacs ~/.bashrc'
 alias ea='emacs ~/.bash_aliases'
 alias rebash='source ~/.bashrc'
 
-# ubuntu
-alias n='nautilus'
-# TODO: make a shim that actually mimic's macOS' behavior
-alias open='n'
+# linux
+alias open='xdg-open'
 
 # ssh
 alias akp='eval "$(ssh-agent -s)"'
