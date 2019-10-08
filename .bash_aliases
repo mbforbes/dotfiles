@@ -6,9 +6,6 @@ alias rebash='source ~/.bashrc'
 # general
 alias u='cd ..'
 
-# linux only
-alias open='xdg-open'
-
 # ssh
 alias akp='eval "$(ssh-agent -s)"'
 alias ak='ssh-add ~/.ssh/id_rsa'
@@ -29,6 +26,21 @@ alias recycle='ssh mbforbes@recycle'
 alias bicycle='ssh mbforbes@bicycle'
 alias tricycle='ssh mbforbes@tricycle'
 
+
+# mac only. you don't get some of these fun ones to start wheeee.
+# ---
+# ls fun
+alias ll='ls -alhF'
+alias la='ls -A'
+alias l='ls -CF'
+
+
+# linux only.
+# ---
+
 # gpu machine only. dashboards.
 alias gpus='watch -n 0.5 nvidia-smi'
 alias gpu='gpus'
+
+# pick the program for me please.
+alias open='xdg-open'

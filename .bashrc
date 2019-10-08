@@ -4,10 +4,25 @@ EDITOR='emacs -nw'
 # So yeah this is fun.
 export PS1="\[\e[32m\][\[\e[m\]\[\e[32m\]\t\[\e[m\]\[\e[32m\]]\[\e[m\] \[\e[33m\]\u\[\e[m\]\[\e[33m\]@\[\e[m\]\[\e[33m\]\h\[\e[m\] \[\e[36m\][\[\e[m\]\[\e[36m\]\w\[\e[m\]\[\e[36m\]]\[\e[m\] \n\\$ "
 
-# iterm2 crap
+# u'll probably need pyenv stuff
+
+
+# mac only. because it doesn't come with a default .bashrc (er, .bash_profile).
+# ---
+
+# colors!
+alias grep='grep --color=auto'
+export CLICOLOR="true"
+
+# don't forget this
+source ~/.bash_aliases
+
+
+# linux only.
+# ---
+
+# iterm2 crap (for integration when ssh'ing in from a mac)
 [[ $TERM_PROGRAM == "iTerm.app" ]] && test -r ~/.iterm2_shell_integration.bash && source ~/.iterm2_shell_integration.bash
 export iterm2_hostname=gengar
 
 # u might need CUDA stuff
-
-# u'll probably need pyenv stuff
