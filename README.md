@@ -76,8 +76,17 @@ erc
 pyenv versions
 pyenv install 3.x.x
 
+
 #
-# (4) mac only
+# (4) Other configs
+#
+
+# make emacs save files in a temp dir somewhere.
+cp .emacs ~/
+
+
+#
+# (5) mac only
 #
 
 # Reminders:
@@ -88,5 +97,5 @@ pyenv install 3.x.x
 # OK let's get to the good stuff: legitifying the emacs keybindings
 # Coutesy of https://gist.github.com/cheapRoc/9670905
 mkdir -p ~/Library/KeyBindings/
-cp EmacsKeyBinding.dict ~/Library/KeyBindings/
+cp EmacsKeyBinding.dict ~/Library/KeyBindings/DefaultKeyBinding.dict
 ```
