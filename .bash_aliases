@@ -3,7 +3,10 @@ alias erc='emacs ~/.bashrc'
 alias ea='emacs ~/.bash_aliases'
 alias rebash='source ~/.bashrc'
 
-# linux
+# general
+alias u='cd ..'
+
+# linux only
 alias open='xdg-open'
 
 # ssh
@@ -21,10 +24,11 @@ alias gpull='git pull --rebase origin master'
 # projects quick nav
 alias repos='cd ~/repos'
 
-# remote
+# remote. (if... local...)
 alias recycle='ssh mbforbes@recycle'
 alias bicycle='ssh mbforbes@bicycle'
 alias tricycle='ssh mbforbes@tricycle'
 
-# dashboards
+# gpu machine only. dashboards.
 alias gpus='watch -n 0.5 nvidia-smi'
+alias gpu='gpus'

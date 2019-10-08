@@ -2,7 +2,7 @@
 EDITOR='emacs -nw'
 
 # So yeah this is fun.
-export PS1="\[\033[38;5;9m\]{?\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;9m\]\$?}\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;10m\][\t]\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;11m\]\u@\h\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\[\033[38;5;14m\][\[$(tput bold)\]\w\[$(tput sgr0)\]]\[$(tput sgr0)\]\[\033[38;5;15m\]\n\[$(tput bold)\]\\$\[$(tput sgr0)\] \[$(tput sgr0)\]"
+export PS1="\[\e[32m\][\[\e[m\]\[\e[32m\]\t\[\e[m\]\[\e[32m\]]\[\e[m\] \[\e[33m\]\u\[\e[m\]\[\e[33m\]@\[\e[m\]\[\e[33m\]\h\[\e[m\] \[\e[36m\][\[\e[m\]\[\e[36m\]\w\[\e[m\]\[\e[36m\]]\[\e[m\] \n\\$ "
 
 # iterm2 crap
 [[ $TERM_PROGRAM == "iTerm.app" ]] && test -r ~/.iterm2_shell_integration.bash && source ~/.iterm2_shell_integration.bash
