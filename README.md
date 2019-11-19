@@ -91,8 +91,12 @@ cp .emacs ~/
 
 # Reminders:
 # - you may want to install homebrew
-# - you may want to install some other apps (VS Code, Things, Day One,
+# - you may want to install some other apps (VS Code, Things, Day One, Ulysses,
 #   Slack, Chrome, Spotify, Tomato One, any VPN software)
+
+# Shell utilities: `imgcat`
+curl https://www.iterm2.com/utilities/imgcat > /usr/local/bin/imgcat
+chmod u+x /usr/local/bin/imgcat
 
 # OK let's get to the good stuff: legitifying the emacs keybindings
 # Coutesy of https://gist.github.com/cheapRoc/9670905
