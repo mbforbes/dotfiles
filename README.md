@@ -45,9 +45,10 @@ rebash
 # generate a key
 ssh-keygen -t rsa -b 4096 -C "<computer-name>"
 
-# now, re: ~/.ssh/id_rsa.pub
-# - put pub into github (if coding or cloning stuff)
-# - put pub into servers' ({re/bi/tr}icycle) authroized_keys (if copying data)
+# now, re: ~/.ssh/id_rsa.pub, put it into
+# - github                                           (if coding or cloning stuff)
+# - dept servers' authorized keys ({re/bi/tr}icycle) (if copying data)
+# - gpu machines (check lastpass)                    (if running jobs)
 
 # now, re: ~/.ssh/authorized_keys:
 # - put your base comps' (e.g., workstation, laptop) pubs in here
@@ -94,12 +95,20 @@ cp .emacs ~/
 # - you may want to install some other apps (VS Code, Things, Day One, Ulysses,
 #   Slack, Chrome, Spotify, Tomato One, any VPN software)
 
+# Stuff to brew install
+brew update
+brew install tmux watch
+
+# Fix some iterm2 config
+# - Profiles > Keys > both options as Esc+
+# - Keys > Key Bindings: make option+H send hex codes: 0x1B 0x08
+
 # Shell utilities: `imgcat`
 curl https://www.iterm2.com/utilities/imgcat > /usr/local/bin/imgcat
 chmod u+x /usr/local/bin/imgcat
 
-# OK let's get to the good stuff: legitifying the emacs keybindings
-# Coutesy of https://gist.github.com/cheapRoc/9670905
+# Legitifying the emacs keybindings
+# Courtesy of https://gist.github.com/cheapRoc/9670905
 mkdir -p ~/Library/KeyBindings/
 cp EmacsKeyBinding.dict ~/Library/KeyBindings/DefaultKeyBinding.dict
 ```
