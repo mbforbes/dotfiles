@@ -63,12 +63,12 @@ ssh-keygen -t rsa -b 4096 -C "<computer-name>"
 # cache:
 sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \
 libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev \
-xz-utils tk-dev
+xz-utils tk-dev libffi-dev liblzma-dev python-openssl git
 
 # install
 # reference: https://github.com/pyenv/pyenv-installer
 # cache:
-curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
+curl https://pyenv.run | bash
 
 # it will have you edit .bashrc to put crap in there
 erc
