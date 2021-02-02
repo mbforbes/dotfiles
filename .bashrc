@@ -14,6 +14,9 @@ export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
 # u'll probably need pyenv stuff
 
+# Custom scripts
+export PATH="~/repos/dotfiles/scripts:$PATH"
+
 # mac only. because it doesn't come with a default .bashrc (er, .bash_profile).
 # ---
 
@@ -23,7 +26,6 @@ export CLICOLOR="true"
 
 # don't forget this
 source ~/.bash_aliases
-
 
 # linux only.
 # ---

@@ -1,0 +1,24 @@
+#!/bin/bash
+
+#
+# Print date in 14-day month, 26-month year format
+# (YY) M DD
+# |    |  ^ day goes from 00 to 013
+# |    ^ month goes from A to Z
+# ^ standard AD calendar year (optional)
+#
+# Ref: Arvelie calendar
+# https://wiki.xxiivv.com/site/time.html
+#
+# My main modification is I'm using the conventional year.
+#
+
+doy1=$(date +%j )
+doy=$(echo "$doy1 - 1" | bc)
+ms=('A' 'B' 'C' 'D' 'E' 'F' 'G' 'H' 'I' 'J' 'K' 'L' 'M' 'N' 'O' 'P' 'Q' 'R' 'S' 'T' 'U' 'V' 'W' 'X' 'Y' 'Z' '+')
+mn=$(echo "(${doy}) / 14" | bc)
+day=$(echo "${doy} % 14" | bc)
+# with year:
+# echo "$(date +%y) ${ms[mn]} $(printf '%02d' $day)"
+# without year:
+echo "${ms[mn]} $(printf '%02d' $day)"
