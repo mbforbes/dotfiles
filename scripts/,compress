@@ -1,0 +1,65 @@
+#!/bin/bash
+
+#
+# Compresses all image (.png, .jpg, .jpeg) files in current directory.
+#
+# Writes foo.png to foo-small.jpg. Or, if -d is provided, removes source file (!) and
+# names destimation foo.jpg.
+#
+
+# Settings from https://sipb.mit.edu/doc/safe-shell/
+
+# -e          = exit on error
+# -u          = unset is an error
+# -o pipefail = pipelines to produce a failure return code if any command errors;
+#               normally, pipelines only return a failure if the last command errors.
+# NOTE: -f    = disable filename expansion (globbing), but we're using that here.
+set -eu -o pipefail
+
+# "If set, Bash allows filename patterns which match no files to expand to a null
+# string, rather than themselves."
+# https://www.gnu.org/software/bash/manual/html_node/The-Shopt-Builtin.html
+shopt -s nullglob
+
+# Options
+# https://www.baeldung.com/linux/use-command-line-arguments-in-bash-script
+# NOTE: I think we put a colon (e.g., d:) after the flag if it takes an argument.
+destructive=0
+while getopts d flag; do
+    case "${flag}" in
+        d) destructive=1;;
+    esac
+done
+
+# echo "d: ${destructive}"
+
+for f in *.{png,jpg,jpeg}; do
+    base="${f%.*}"
+    f_out="${base}-small.jpg"
+
+    if [[ ${base} == *-small ]]; then
+        echo "Skipping   ${f} (filename ends with -small)"
+        continue
+    fi
+    if [ -f ${f_out} ]; then
+        echo "Skipping   ${f} (destination ${f_out} exists)"
+        continue
+    fi
+
+    convert ${f} -sampling-factor 4:2:0 -strip -quality 85 -interlace JPEG -colorspace RGB ${f_out}
+    if [[ $destructive == 1 ]]; then
+        # Destructive: destroy old file, make new one similar (or same) name, with the
+        # constraint that it's .jpg.
+        f_final=${base}.jpg
+        rm ${f}
+        mv ${f_out} ${f_final}
+        if [[ ${f} == "${f_final}" ]]; then
+            echo "Compressed ${f}"
+        else
+            echo "Compressed ${f} -> ${f_final}"
+        fi
+    else
+        # Non-destructive; there's just a new file.
+        echo "Added      ${f} -> ${f_out}"
+    fi
+done
