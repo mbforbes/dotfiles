@@ -1,0 +1,32 @@
+#!/bin/bash
+
+#
+# Make a new jekyll note in the garage, joining passed arguments as title.
+#
+
+# Settings from https://sipb.mit.edu/doc/safe-shell/
+# -e          = exit on error
+# -u          = unset is an error
+# -o pipefail = pipelines to produce a failure return code if any command errors;
+#               normally, pipelines only return a failure if the last command errors.
+set -eu -o pipefail
+
+title="$*"
+slug=$(echo ${title} | tr -s ' ",.?' - | tr  "[:upper:]" "[:lower:]" | sed "s/'//g" | sed "s/-$//g")
+path=~/repos/website/_garage/${slug}.md
+d=$(date +"%Y-%m-%d %H:%M %z")
+
+if [[ -f ${path} ]]; then
+    echo "Error: File exits: ${path}"
+    exit 1
+fi
+
+cat > ${path} <<- EOF
+---
+title: ${title}
+date: ${d}
+---
+
+EOF
+
+code ${path}
