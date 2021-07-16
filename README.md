@@ -46,13 +46,12 @@ rebash
 ssh-keygen -t rsa -b 4096 -C "<computer-name>"
 
 # now, re: ~/.ssh/id_rsa.pub, put it into
-# - github                                           (if coding or cloning stuff)
-# - dept servers' authorized keys ({re/bi/tr}icycle) (if copying data)
-# - gpu machines (check lastpass)                    (if running jobs)
+# - github  (if coding or cloning stuff)
+# and maybe
+# - other servers' authorized keys (if copying data)
 
 # now, re: ~/.ssh/authorized_keys:
 # - put your base comps' (e.g., workstation, laptop) pubs in here
-
 
 #
 # (3) pyenv
@@ -61,6 +60,7 @@ ssh-keygen -t rsa -b 4096 -C "<computer-name>"
 # you might need this on ubuntu before install python versions
 # reference: https://github.com/pyenv/pyenv/wiki/Common-build-problems
 # cache:
+sudo apt-get update
 sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \
 libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev \
 xz-utils tk-dev libffi-dev liblzma-dev python-openssl git
@@ -70,7 +70,8 @@ xz-utils tk-dev libffi-dev liblzma-dev python-openssl git
 # cache:
 curl https://pyenv.run | bash
 
-# it will have you edit .bashrc to put crap in there
+# it will have you edit .profile and .bashrc to put crap in there
+emacs ~/.profile
 erc
 
 # probably install a version you want

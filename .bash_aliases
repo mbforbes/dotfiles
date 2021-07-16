@@ -15,13 +15,13 @@ alias gits='git status'
 alias gitb='git branch'
 alias gitd='git diff'
 alias gitr='git remote -v'
-alias ge='git push origin master'
-alias gpull='git pull --rebase origin master'
+alias ge='git push origin'
+alias gpull='git pull --rebase origin'
 
 # projects quick nav
 alias repos='cd ~/repos'
 
-# remote. (if... local...)
+# any remote aliases, e.g.,
 alias recycle='ssh mbforbes@recycle'
 alias bicycle='ssh mbforbes@bicycle'
 alias tricycle='ssh mbforbes@tricycle'
@@ -42,5 +42,5 @@ alias l='ls -CF'
 alias gpus='watch -n 0.5 nvidia-smi'
 alias gpu='gpus'
 
-# pick the program for me please.
+# If GUI: pick the program for me please
 alias open='xdg-open'
