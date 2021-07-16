@@ -94,8 +94,10 @@ cp ~/repos/dotfiles/.emacs ~/
 # make tmux not conflict w/ emacs keybindings
 cp ~/repos/dotfiles/.tmux.conf ~/
 
-# global gitignore
+# git config
 git config --global core.excludesfile ~/repos/dotfiles/.gitignore_global
+git config --global user.email "<gmail>"
+git config --global user.name "<first> <last>"
 
 
 #
