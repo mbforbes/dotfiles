@@ -83,8 +83,19 @@ pyenv install 3.x.x
 # (4) Other configs
 #
 
-# make emacs save files in a temp dir somewhere.
-cp .emacs ~/
+# download this repo for files
+mkdir ~/repos/
+cd ~/repos/
+git clone git@github.com:mbforbes/dotfiles.git
+
+# make emacs save files in a temp dir somewhere
+cp ~/repos/dotfiles/.emacs ~/
+
+# make tmux not conflict w/ emacs keybindings
+cp ~/repos/dotfiles/.tmux.conf ~/
+
+# global gitignore
+git config --global core.excludesfile ~/repos/dotfiles/.gitignore_global
 
 
 #
