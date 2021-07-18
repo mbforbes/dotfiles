@@ -21,6 +21,9 @@ set -eu -o pipefail
 # https://www.gnu.org/software/bash/manual/html_node/The-Shopt-Builtin.html
 shopt -s nullglob
 
+# Make glob case insensitive, so we can get, e.g., .PNG files (iPhone screenshots).
+shopt -s nocaseglob
+
 # Options
 # https://www.baeldung.com/linux/use-command-line-arguments-in-bash-script
 # NOTE: I think we put a colon (e.g., d:) after the flag if it takes an argument.
