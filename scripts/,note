@@ -12,13 +12,18 @@
 set -eu -o pipefail
 
 title="$*"
-slug=$(echo ${title} | tr -s ' ",.?' - | tr  "[:upper:]" "[:lower:]" | sed "s/'//g" | sed "s/-$//g")
+slug=$(echo ${title} | tr -s ' ",.?:' - | tr  "[:upper:]" "[:lower:]" | sed "s/'//g" | sed "s/-$//g")
 path=~/repos/website/_garage/${slug}.md
 d=$(date +"%Y-%m-%d %H:%M %z")
 
 if [[ -f ${path} ]]; then
     echo "Error: File exits: ${path}"
     exit 1
+fi
+
+# If title contains a : in it, front matter (YAML?) needs quote escaping.
+if [[ "${title}" == *":"* ]]; then
+    title="\"${title}\""
 fi
 
 cat > ${path} <<- EOF
