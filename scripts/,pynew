@@ -1,0 +1,41 @@
+#!/bin/bash
+
+#
+# Make a new python environment with the provided name, set it to the local version in
+# the current directory.
+#
+
+# Settings from https://sipb.mit.edu/doc/safe-shell/
+
+# -e          = exit on error
+# -u          = unset is an error
+# -f          = disable filename expansion (globbing), but we're using that here.
+# -o pipefail = pipelines to produce a failure return code if any command errors;
+#               normally, pipelines only return a failure if the last command errors.
+set -euf -o pipefail
+
+if [[ $# -ne 1 ]]; then
+    echo "usage: ,pynew [new-env-name]"
+    exit 2
+fi
+
+if pyenv local 2>/dev/null; then
+    echo ",pynew: local python environment already exists."
+    exit 1
+fi
+
+if pyenv versions | grep "\b$1\b"; then
+    echo ",pynew: Virtual env $1 already in use."
+    exit 1
+fi
+
+# Use latest installed python 3 version.
+python_version=$(pyenv versions | grep "3\.\d\.\d$" | sort -V -r | head -n1)
+echo "Using Python ${python_version}"
+pyenv virtualenv ${python_version} ${1}
+pyenv local $1
+pip install --upgrade pip
+
+# Default requirements.txt. Could use file at some point.
+echo -e "black\nmypy\nrich" > requirements.txt
+pip install -r requirements.txt

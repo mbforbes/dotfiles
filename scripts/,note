@@ -12,12 +12,17 @@
 set -eu -o pipefail
 
 title="$*"
+
+if [ ${#title} -eq 0 ]; then
+    echo "usage: ,note [Title of note]"
+    exit 1
+fi
+
 slug=$(echo ${title} | tr -s ' ",.?:' - | tr  "[:upper:]" "[:lower:]" | sed "s/'//g" | sed "s/-$//g")
 path=~/repos/website/_garage/${slug}.md
-d=$(date +"%Y-%m-%d %H:%M %z")
 
 if [[ -f ${path} ]]; then
-    echo "Error: File exits: ${path}"
+    echo ",note: Error: File exits: ${path}"
     exit 1
 fi
 
@@ -25,6 +30,7 @@ fi
 if [[ "${title}" == *":"* ]]; then
     title="\"${title}\""
 fi
+d=$(date +"%Y-%m-%d %H:%M %z")
 
 cat > ${path} <<- EOF
 ---

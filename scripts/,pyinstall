@@ -1,0 +1,39 @@
+#!/bin/bash
+
+#
+# Install a new library in a virtualenv; add to requirements.txt and install w/ pip.
+#
+# Known bug: If you specify a bad package, it still gets added to the requirements.txt
+# and you need to go clean it up manually.
+#
+
+# Settings from https://sipb.mit.edu/doc/safe-shell/
+
+# -e          = exit on error
+# -u          = unset is an error
+# -f          = disable filename expansion (globbing), but we're using that here.
+# -o pipefail = pipelines to produce a failure return code if any command errors;
+#               normally, pipelines only return a failure if the last command errors.
+set -euf -o pipefail
+
+if [[ $# -ne 1 ]]; then
+    echo "usage: ,pyinstall [pypi-package]"
+    exit 2
+fi
+
+if ! pyenv local; then
+    echo ",pyinstall: must be in local python environment."
+    exit 1
+fi
+
+if ! [[ -f "requirements.txt" ]]; then
+    echo ",pyinstall: didn't find requirements.txt. Run in project root."
+fi
+
+if grep "\b$1\b" requirements.txt; then
+    echo ",pyinstall: package $1 already installed."
+    exit 1
+fi
+
+echo $1 >> requirements.txt
+pip install -r requirements.txt
