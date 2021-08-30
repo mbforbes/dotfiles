@@ -18,6 +18,10 @@ if [ ${#title} -eq 0 ]; then
     exit 1
 fi
 
+# NOTE: Keeping non-ascii characters around so we can have interesting filenames &
+# titles. This seems to mostly work, except the URL, when copy-pasted, gets kinda wonky.
+# See, e.g., the "Bézier basics" note. So, might be worth hacking for URL? Or looking up
+# to see whether fixable w/ URL.
 slug=$(echo ${title} | tr -s ' ",.?:' - | tr  "[:upper:]" "[:lower:]" | sed "s/'//g" | sed "s/-$//g")
 path=~/repos/website/_garage/${slug}.md
 

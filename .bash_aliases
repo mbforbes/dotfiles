@@ -26,6 +26,9 @@ alias recycle='ssh mbforbes@recycle'
 alias bicycle='ssh mbforbes@bicycle'
 alias tricycle='ssh mbforbes@tricycle'
 
+# python
+# ---
+alias piup='pip install --upgrade pip'
 
 # mac only. you don't get some of these fun ones to start wheeee.
 # ---

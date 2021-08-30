@@ -6,6 +6,10 @@
 # Writes foo.png to foo-small.jpg. Or, if -d is provided, removes source file (!) and
 # names destimation foo.jpg.
 #
+# TODO: Maybe take filenames as input, rather than having script scan. If annoying
+# (i.e., can't figure out simple bash glob or `find` command), can pull into separate
+# script like `,photos` or something.
+#
 
 # Settings from https://sipb.mit.edu/doc/safe-shell/
 

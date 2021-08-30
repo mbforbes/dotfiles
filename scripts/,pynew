@@ -4,6 +4,9 @@
 # Make a new python environment with the provided name, set it to the local version in
 # the current directory.
 #
+# TODO: slugify and use cur dir as default.
+# https://stackoverflow.com/a/63286099/3838962
+#
 
 # Settings from https://sipb.mit.edu/doc/safe-shell/
 
@@ -37,5 +40,5 @@ pyenv local $1
 pip install --upgrade pip
 
 # Default requirements.txt. Could use file at some point.
-echo -e "black\nmypy\nrich" > requirements.txt
+echo -e "black\nmypy\ntqdm\nrich" > requirements.txt
 pip install -r requirements.txt

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+#
+# Turn a .mov (e.g., my QuickTime) into an .mp4
+#
+
+# TODO: script.
+echo "ffmpeg -i [name.mov] -vcodec h264 -acodec mp2 [name.mp4] && rm [name.mov]"
