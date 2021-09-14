@@ -6,27 +6,15 @@
 # Writes foo.png to foo-small.jpg. Or, if -d is provided, removes source file (!) and
 # names destimation foo.jpg.
 #
-# TODO: Maybe take filenames as input, rather than having script scan. If annoying
-# (i.e., can't figure out simple bash glob or `find` command), can pull into separate
-# script like `,photos` or something.
-#
 
 # Settings from https://sipb.mit.edu/doc/safe-shell/
 
 # -e          = exit on error
 # -u          = unset is an error
+# -f          = disable filename expansion (globbing)
 # -o pipefail = pipelines to produce a failure return code if any command errors;
 #               normally, pipelines only return a failure if the last command errors.
-# NOTE: -f    = disable filename expansion (globbing), but we're using that here.
 set -eu -o pipefail
-
-# "If set, Bash allows filename patterns which match no files to expand to a null
-# string, rather than themselves."
-# https://www.gnu.org/software/bash/manual/html_node/The-Shopt-Builtin.html
-shopt -s nullglob
-
-# Make glob case insensitive, so we can get, e.g., .PNG files (iPhone screenshots).
-shopt -s nocaseglob
 
 # Options
 # https://www.baeldung.com/linux/use-command-line-arguments-in-bash-script
@@ -40,7 +28,24 @@ done
 
 # echo "d: ${destructive}"
 
-for f in *.{png,jpg,jpeg}; do
+# 1+ input filenames
+if [ ${#@} -eq 0 ]; then
+    echo "usage: ,compress [-d] image1 [image2 ...]"
+    exit 1
+fi
+
+for f in "$@"; do
+    # HACK; should shift option out of arg list. This would also make the number
+    # of args check above correct.
+    # https://unix.stackexchange.com/questions/156223/bash-how-to-remove-options-from-parameters-after-processing
+    if [[ "${f}" == "-d" ]]; then
+        continue
+    fi
+    if [[ ! -f "${f}" ]]; then
+        echo "Skipping   ${f} (file not found)"
+        continue
+    fi
+
     base="${f%.*}"
     f_out="${base}-small.jpg"
 
@@ -53,7 +58,7 @@ for f in *.{png,jpg,jpeg}; do
         continue
     fi
 
-    convert ${f} -sampling-factor 4:2:0 -strip -quality 85 -interlace JPEG -colorspace RGB ${f_out}
+    convert ${f} -sampling-factor 4:2:0 -strip -quality 85 -interlace JPEG -colorspace sRGB ${f_out}
     if [[ $destructive == 1 ]]; then
         # Destructive: destroy old file, make new one similar (or same) name, with the
         # constraint that it's .jpg.

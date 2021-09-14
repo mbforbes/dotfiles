@@ -1,0 +1,33 @@
+#!/bin/bash
+
+#
+# Compresses passed images, writing each to [basename]-thumb.jpg
+#
+# Size chosen is 216 square, becuase base size is 72, and retina (/phone) screens have
+# a pixel density of commonly up to 3. (Some even have 4, but rare enough now doesn't
+# seem worth it).
+#
+
+# -e          = exit on error
+# -u          = unset is an error
+# -f          = disable filename expansion (globbing)
+# -o pipefail = pipelines to produce a failure return code if any command errors;
+#               normally, pipelines only return a failure if the last command errors.
+set -euf -o pipefail
+
+# 1+ input filenames
+if [ ${#@} -eq 0 ]; then
+    echo "usage: ,thumb image1 [image2 ...]"
+    exit 1
+fi
+
+for img in "$@"; do
+    if [[ ! -f "${img}" ]]; then
+        echo ",thumb: Error: File not found: ${img}"
+        exit 1
+    fi
+
+    base="${img%.*}"
+    out="${base}-thumb.jpg"
+    convert "${img}" -sampling-factor 4:2:0 -strip -quality 95 -interlace JPEG -colorspace sRGB -resize 216x216 "${out}"
+done

@@ -1,0 +1,21 @@
+#!/bin/bash
+
+#
+# Turn passed args ("something like this") into a slug ("something-like-this").
+#
+# NOTE: Keeping non-ascii characters around so we can have interesting filenames &
+# titles. This seems to mostly work, except the URL, when copy-pasted, gets kinda wonky.
+# See, e.g., the "Bézier basics" note. So, might be worth hacking for URL? Or looking up
+# to see whether fixable w/ URL. If we want to go more vanilla, option:
+# https://stackoverflow.com/questions/47050589/create-url-friendly-slug-with-pure-bash/63286099#63286099
+# only downside is that in my testing, é wasn't convered to "e" but something with "-".
+#
+
+# Settings from https://sipb.mit.edu/doc/safe-shell/
+# -e          = exit on error
+# -u          = unset is an error
+# -o pipefail = pipelines to produce a failure return code if any command errors;
+#               normally, pipelines only return a failure if the last command errors.
+set -eu -o pipefail
+
+echo ${*} | tr -s ' ",.?:' - | tr  "[:upper:]" "[:lower:]" | sed "s/'//g" | sed "s/-$//g"

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #
-# Make a new jekyll note in the garage, joining passed arguments as title.
+# Make a new jekyll post, joining passed arguments as title.
 #
 
 # Settings from https://sipb.mit.edu/doc/safe-shell/
@@ -14,15 +14,16 @@ set -eu -o pipefail
 title="$*"
 
 if [ ${#title} -eq 0 ]; then
-    echo "usage: ,note [Title of note]"
+    echo "usage: ,post [Title of post]"
     exit 1
 fi
 
 slug=$(,slugify $title)
-path=~/repos/website/_garage/${slug}.md
+day=$(date +%Y-%m-%d)
+path=~/repos/website/_posts/${day}-${slug}.md
 
 if [[ -f ${path} ]]; then
-    echo ",note: Error: File exits: ${path}"
+    echo ",post: Error: File exits: ${path}"
     exit 1
 fi
 
@@ -35,7 +36,11 @@ d=$(date +"%Y-%m-%d %H:%M %z")
 cat > ${path} <<- EOF
 ---
 title: ${title}
+subtitle: TBD
 date: ${d}
+category: Writing
+tag: TBD "Creating & Thinking" Design Health Programming
+image: /data/${slug}/TBD.jpg
 ---
 
 EOF

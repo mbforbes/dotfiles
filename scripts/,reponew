@@ -1,0 +1,7 @@
+#!/bin/bash
+
+#
+# Instant reminder for how to make new GitHub + local repo.
+#
+
+echo "gh repo create [name] -y -d "[desc]" --public"
