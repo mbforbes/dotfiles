@@ -1,0 +1,50 @@
+#!/bin/bash
+
+#
+# Make a new p5js sketch, joining passed arguments as title.
+#
+
+# Settings from https://sipb.mit.edu/doc/safe-shell/
+# -e          = exit on error
+# -u          = unset is an error
+# -o pipefail = pipelines to produce a failure return code if any command errors;
+#               normally, pipelines only return a failure if the last command errors.
+set -eu -o pipefail
+
+# get slug
+title="$*"
+if [ ${#title} -eq 0 ]; then
+    echo "usage: ,p5js [Title of sketch]"
+    exit 1
+fi
+slug=$(,slugify $title)
+
+# settings. lack of / on `template` intentional for `cp`
+dir=~/repos/p5js-experiments/src/
+template=~/repos/p5js-experiments/src/00-template
+to_open=~/repos/p5js-experiments/index.html
+
+# find existing files to get number
+existing=$(ls ${dir} | grep -v ".ts")
+highest="0"
+for e in ${existing[@]}; do
+    num=$(echo ${e} | cut -d'-' -f1)
+    if [[ ${num} -gt ${highest} ]]; then
+        highest=${num}
+    fi
+done
+new_num=$(echo "${highest} + 1" | bc | xargs printf "%02d")
+
+# calculate new path
+new_path=${dir}${new_num}-${slug}
+
+# copy over
+echo "Making new p5js sketch at ${new_path}"
+cp -R ${template} ${new_path}
+
+# TODO: Programmatically edit the index.html file. Wow this is a pain to automate.
+code ${new_path}/index.ts
+code ${to_open}
+
+# TODO: Maybe even check whether server is running, could start one.
+# TODO: Maybe even open chrome window to new sketch.
