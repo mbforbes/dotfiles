@@ -6,12 +6,8 @@ alias rebash='source ~/.bashrc'
 # general
 alias u='cd ..'
 
-# ssh
-alias akp='eval "$(ssh-agent -s)"'
-alias ak='ssh-add ~/.ssh/id_rsa'
-
 # git
-alias gits='git status'
+alias gs='git status'
 alias gitb='git branch'
 alias gitd='git diff'
 alias gitr='git remote -v'
@@ -21,11 +17,6 @@ alias gpull='git pull --rebase origin'
 # projects quick nav
 alias repos='cd ~/repos'
 
-# any remote aliases, e.g.,
-alias recycle='ssh mbforbes@recycle'
-alias bicycle='ssh mbforbes@bicycle'
-alias tricycle='ssh mbforbes@tricycle'
-
 # python
 # ---
 alias piup='pip install --upgrade pip'
@@ -33,9 +24,8 @@ alias piup='pip install --upgrade pip'
 # mac only. you don't get some of these fun ones to start wheeee.
 # ---
 # ls fun
-alias ll='ls -alhF'
-alias la='ls -A'
-alias l='ls -CF'
+alias ll='ls -lahF'
+alias l='ll'
 
 
 # linux only.
@@ -47,3 +37,7 @@ alias gpu='gpus'
 
 # If GUI: pick the program for me please
 alias open='xdg-open'
+
+# ssh
+alias akp='eval "$(ssh-agent -s)"'
+alias ak='ssh-add ~/.ssh/id_rsa'
