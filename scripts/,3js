@@ -23,9 +23,10 @@ slug=$(,slugify $title)
 dir=~/repos/3js-experiments/src/
 template=~/repos/3js-experiments/src/00-template
 to_open=~/repos/3js-experiments/index.html
+to_open_tmp=~/repos/3js-experiments/index.tmp.html
 
 # find existing files to get number
-existing=$(ls ${dir} | grep -v ".ts")
+existing=$(ls ${dir})
 highest="0"
 for e in ${existing[@]}; do
     num=$(echo ${e} | cut -d'-' -f1)
@@ -42,9 +43,21 @@ new_path=${dir}${new_num}-${slug}
 echo "Making new 3js experiment at ${new_path}"
 cp -R ${template} ${new_path}
 
-# TODO: Programmatically edit the index.html file. Wow this is a pain to automate.
-code ${new_path}/index.ts
-code ${to_open}
+# TODO: do this elegantly by looking up that one program where you don't have to make a
+# tempfile
+# Eit the index.html file.
+# Comment out all dist ones
+cat ${to_open} | sed -E 's/^ *(<script.*dist.*)/  <!-- \1 -->/' > ${to_open_tmp}
+# next, append new one at end
+cat ${to_open_tmp} | sed -E "s/<\/head>/  <script defer src=\"dist\/${new_num}-${slug}.js\"><\/script>\n<\/head>/" > ${to_open}
+rm ${to_open_tmp}
 
-# TODO: Maybe even check whether server is running, could start one.
-# TODO: Maybe even open chrome window to new sketch.
+# Open file for editing
+code ${new_path}/index.ts
+
+# If server is running, open page; if not, start server (which auto opens page)
+if lsof -i :8080 -P -n | grep LISTEN > /dev/null; then
+    open -u http://localhost:8080
+else
+    npm run serve:dev
+fi
