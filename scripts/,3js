@@ -29,7 +29,7 @@ to_open_tmp=~/repos/3js-experiments/index.tmp.html
 existing=$(ls ${dir})
 highest="0"
 for e in ${existing[@]}; do
-    num=$(echo ${e} | cut -d'-' -f1)
+    num=$(echo ${e} | cut -d'-' -f1 | sed 's/^0*//')
     if [[ ${num} -gt ${highest} ]]; then
         highest=${num}
     fi
@@ -56,6 +56,7 @@ rm ${to_open_tmp}
 code ${new_path}/index.ts
 
 # If server is running, open page; if not, start server (which auto opens page)
+cd ~/repos/3js-experiments/
 if lsof -i :8080 -P -n | grep LISTEN > /dev/null; then
     open -u http://localhost:8080
 else
