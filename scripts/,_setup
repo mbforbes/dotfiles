@@ -1,0 +1,19 @@
+#!/bin/bash
+
+#
+# From brief testing, even though they run in bash (due to the line at the top), NONE of
+# the following are run when I run one of these scripts directly from zsh:
+# - ~/.bashrc
+# - ~/.bash_profile
+# - ~/.profile
+#
+# This means that nothing is setup, so things like pyenv can't run. Scripts run this
+# file first for any setup.
+#
+
+export SETUP_INDICATOR="hi from ,_setup"
+
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv init --path)"

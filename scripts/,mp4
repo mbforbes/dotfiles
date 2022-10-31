@@ -4,5 +4,15 @@
 # Turn a .mov (e.g., my QuickTime) into an .mp4
 #
 
-# TODO: script.
-echo "ffmpeg -i [name.mov] -vcodec h264 -acodec mp2 [name.mp4] && rm [name.mov]"
+if [[ $# -ne 1 ]]; then
+    echo "usage: ,mp4 input-video-file"
+    exit 2
+fi
+
+f_in=$1
+base="${f_in%.*}"
+f_out="${base}.mp4"
+# echo "$f_in --> $f_out"
+
+# echo "ffmpeg -i [name.mov] -vcodec h264 -acodec mp2 [name.mp4] && rm [name.mov]"
+ffmpeg -i $f_in -vcodec h264 -acodec aac $f_out

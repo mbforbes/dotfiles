@@ -19,13 +19,15 @@ set -eu -o pipefail
 # Options
 # https://www.baeldung.com/linux/use-command-line-arguments-in-bash-script
 # NOTE: I think we put a colon (e.g., d:) after the flag if it takes an argument.
+# NOTE: just threw a "shift" in there, but seems like it might be more complex in
+# general... but it's working nicely for me hehe. Reference:
+# https://unix.stackexchange.com/questions/156223/bash-how-to-remove-options-from-parameters-after-processing
 destructive=0
 while getopts d flag; do
     case "${flag}" in
-        d) destructive=1;;
+        d) destructive=1; shift;;
     esac
 done
-
 # echo "d: ${destructive}"
 
 # 1+ input filenames
@@ -34,13 +36,8 @@ if [ ${#@} -eq 0 ]; then
     exit 1
 fi
 
+# echo "args: $@"
 for f in "$@"; do
-    # HACK; should shift option out of arg list. This would also make the number
-    # of args check above correct.
-    # https://unix.stackexchange.com/questions/156223/bash-how-to-remove-options-from-parameters-after-processing
-    if [[ "${f}" == "-d" ]]; then
-        continue
-    fi
     if [[ ! -f "${f}" ]]; then
         echo "Skipping   ${f} (file not found)"
         continue
@@ -58,6 +55,7 @@ for f in "$@"; do
         continue
     fi
 
+    # TODO: Honestly, this should just use mozjpeg
     convert ${f} -sampling-factor 4:2:0 -strip -quality 85 -interlace JPEG -colorspace sRGB ${f_out}
     if [[ $destructive == 1 ]]; then
         # Destructive: destroy old file, make new one similar (or same) name, with the

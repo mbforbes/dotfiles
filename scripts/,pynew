@@ -7,18 +7,24 @@
 
 # Settings from https://sipb.mit.edu/doc/safe-shell/
 
-# -e          = exit on error
+# -e          = exit on error (not using right now because wtf idk)
 # -u          = unset is an error
-# -f          = disable filename expansion (globbing), but we're using that here.
+# -f          = disable filename expansion (globbing)
 # -o pipefail = pipelines to produce a failure return code if any command errors;
 #               normally, pipelines only return a failure if the last command errors.
-set -euf -o pipefail
+set -uf -o pipefail
+
+# Load pyenv
+source ,_setup
 
 if [[ $# -gt 1 ]]; then
     echo "usage: ,pynew (new-env-name)"
     exit 2
 fi
 
+# NOTE: The following line is causing the script to exit when we have `set -e`. I don't
+# understand why because things in the `if` are supposed to not cause script exit even
+# if they fail. Wasted enough time on this for now.
 if pyenv local 2>/dev/null; then
     echo ",pynew: local python environment already exists."
     exit 1

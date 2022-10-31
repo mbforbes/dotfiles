@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Applies Mozilla mozilla JPEG compression to all passed filenames
+# - uses quality = 80
+# - writes each result to ${basename}.moz80.jpg
+# - add -d to remove originals
+
+# -e          = exit on error
+# -u          = unset is an error
+# -o pipefail = pipelines to produce a failure return code if any command errors;
+#               normally, pipelines only return a failure if the last command errors.
+set -eu -o pipefail
+
+# Options
+destructive=0
+while getopts d flag; do
+    case "${flag}" in
+        d) destructive=1; shift;;
+    esac
+done
+
+# 1+ input filenames
+if [ ${#@} -eq 0 ]; then
+    echo "usage: ,moz [-d] image1 [image2 ...]"
+    exit 1
+fi
+
+for f in "$@"; do
+    base="${f%.*}"
+    f_out="${base}.moz80.jpg"
+    echo "$f --(mozJpeg, q80)--> $f_out"
+    mozjpeg -quality 80 $f > $f_out
+    if [[ $destructive == 1 ]]; then
+        rm $f
+    fi
+done

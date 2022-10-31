@@ -4,4 +4,4 @@
 # Instant reminder for how to make new GitHub + local repo.
 #
 
-echo "gh repo create [name] -y -d "[desc]" --public"
+echo "gh repo create [name] -d "[desc]" --public --clone"

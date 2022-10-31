@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #
-# Make a new jekyll note in the garage, joining passed arguments as title.
+# Make a new note in the garage, joining passed arguments as title.
 #
 
 # Settings from https://sipb.mit.edu/doc/safe-shell/
@@ -19,7 +19,7 @@ if [ ${#title} -eq 0 ]; then
 fi
 
 slug=$(,slugify $title)
-path=~/repos/website/_garage/${slug}.md
+path=~/repos/website-3/posts/garage/${slug}.md
 
 if [[ -f ${path} ]]; then
     echo ",note: Error: File exits: ${path}"
@@ -30,7 +30,7 @@ fi
 if [[ "${title}" == *":"* ]]; then
     title="\"${title}\""
 fi
-d=$(date +"%Y-%m-%d %H:%M %z")
+d=$(date +"%Y-%m-%d")
 
 cat > ${path} <<- EOF
 ---

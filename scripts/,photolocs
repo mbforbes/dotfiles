@@ -1,0 +1,31 @@
+#!/bin/bash
+
+#
+# Extrat locations from passed JPEGs, output in nearly-JSON format.
+#
+
+# Settings from https://sipb.mit.edu/doc/safe-shell/
+# -e          = exit on error
+# -u          = unset is an error
+# -o pipefail = pipelines to produce a failure return code if any command errors;
+#               normally, pipelines only return a failure if the last command errors.
+# TODO: reenable, not sure why I turned these off.
+# set -eu -o pipefail
+
+# 1+ input filenames
+if [ ${#@} -eq 0 ]; then
+    echo "usage: ,photolocs image1 [image2 ...] [> locs.json]"
+    exit 1
+fi
+
+echo "["
+for f in "$@"; do
+    # thanks to https://www.askdavetaylor.com/can-i-analyze-exif-information-on-the-mac-os-x-command-line/
+    lat=$(mdls "$f" | grep Latitude | awk '{print $3}')
+    lon=$(mdls "$f" | grep Longitude | awk '{print $3}')
+    if [[ -n "$lat" && -n "$lon" ]]; then
+        # TODO: This is buggy beacuase freaking JSON. Gotta remove last ,
+        echo "    [$lat, $lon],"
+    fi
+done
+echo "]"

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Maybe useful once everyone's ancient Macs die.
+echo "See this script for a reference"
+
+# for f in *; do
+#     base="${f%.*}"
+#     f_out="${base}.webp"
+#     magick $f -quality 50 -define webp:method=6 $f_out
+# done
