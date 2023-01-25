@@ -51,6 +51,9 @@ require("bluetooth_sleep")
 **********************************
 --]]
 
+-- Common utilities
+require("common")
+
 -- H: Help: Display potential shortcuts.
 -- I could probably auto-generate this from what I load...
 require("help")
@@ -69,3 +72,6 @@ require("agenda")
 
 -- J: Japanese: Open study material, music, timer
 require("japanese")
+
+-- I: Inboxes: Open inboxes, music, timer
+require("inboxes")

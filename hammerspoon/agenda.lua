@@ -10,38 +10,55 @@
 -- * I do wonder exactly what rich data Apple Notes puts into the clipboard when
 --   you copy. From brief Googling this seems hard to inspect, but it might be
 --   possible (pbv was one lead, but didn't show the full data?).
+--
+-- Notes on agenda backburner items:
+-- * meditate
+-- * voxels
 AGENDA_TEXT = hs.styledtext.getStyledTextFromData([[
 <ul>
-    <li>admin</li>
-    <ul>
-        <li>inboxes []</li>
-        <li>travel planning []</li>
-    </ul>
-    <li>daily</li>
-    <ul>
-        <li>meditate []</li>
-        <li>Japanese []</li>
-    </ul>
-    <li>projects</li>
-    <ul>
-        <li>websiite []</li>
-        <li>voxels []</li>
-    </ul>
+    <li>
+        inboxes []
+        <ol>
+            <li>messages</li>
+            <li>gmail</li>
+            <li>fb messenger</li>
+            <li>whatsapp</li>
+            <li>slack</li>
+            <li>things</li>
+        </ol>
+    </li>
+    <li>travel planning []</li>
+    <li>Japanese []</li>
+    <ol>
+        <li>genki []</li>
+        <li>anki</li>
+        <li>wk</li>
+        <li>kw</li>
+    </ol>
+    <li>website []</li>
 </ul>
 ]], "html")
 
 -- Paste Multi-line String
+-- TODO: Why wasn't this in a clipboard util? I guess it's kinda broken?
+-- hs.hotkey.bind({"cmd", "alt", "ctrl"}, "A", function()
+--     hs.notify.new({title="Running Agenda", informativeText="🗓"}):send()
+--     -- save clipboard data to temp
+--     tempClipboard = hs.pasteboard.uniquePasteboard()
+--     hs.pasteboard.writeAllData(tempClipboard, hs.pasteboard.readAllData(nil))
+
+--     -- load string into clipboard and paste
+--     hs.pasteboard.writeObjects(AGENDA_TEXT)
+--     hs.eventtap.keyStroke({'cmd'}, 'v')
+
+--     -- recall clipboard data
+--     hs.pasteboard.writeAllData(nil, hs.pasteboard.readAllData(tempClipboard))
+--     hs.pasteboard.deletePasteboard(tempClipboard)
+-- end)
+
+-- Just add to Things via Apple Shortcut
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "A", function()
     hs.notify.new({title="Running Agenda", informativeText="🗓"}):send()
-    -- save clipboard data to temp
-    tempClipboard = hs.pasteboard.uniquePasteboard()
-    hs.pasteboard.writeAllData(tempClipboard, hs.pasteboard.readAllData(nil))
 
-    -- load string into clipboard and paste
-    hs.pasteboard.writeObjects(AGENDA_TEXT)
-    hs.eventtap.keyStroke({'cmd'}, 'v')
-
-    -- recall clipboard data
-    hs.pasteboard.writeAllData(nil, hs.pasteboard.readAllData(tempClipboard))
-    hs.pasteboard.deletePasteboard(tempClipboard)
+    hs.shortcuts.run("Daily Agenda")
 end)

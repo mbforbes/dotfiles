@@ -18,4 +18,5 @@
 #               normally, pipelines only return a failure if the last command errors.
 set -eu -o pipefail
 
-echo ${*} | tr -s ' ",.?:' - | tr  "[:upper:]" "[:lower:]" | sed "s/'//g" | sed "s/-$//g"
+# TODO: combine buncha seds into some kinda "any of" block lol regexes
+echo ${*} | tr -s ' ",.?:' - | tr  "[:upper:]" "[:lower:]" | sed "s/'//g" | sed "s/-$//g" | sed "s/(//g"  | sed "s/)//g"
