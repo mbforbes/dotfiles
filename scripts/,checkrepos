@@ -1,0 +1,10 @@
+#!/bin/bash
+
+#
+# Runs the git checker.
+#
+#
+
+cd ~/repos/git-checker/
+python checker.py
+cd -
