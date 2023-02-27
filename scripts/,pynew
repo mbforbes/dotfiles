@@ -43,12 +43,16 @@ if pyenv versions | grep "\b${envname}\b"; then
 fi
 
 # Use latest installed python 3 version.
-python_version=$(pyenv versions | grep "3\.\d\.\d$" | sort -V -r | head -n1)
+# awk '{$1=$1};1' <-- trims whitespace
+# need egrep or \d+ doesn't work (head explode emoji)
+python_version=$(pyenv versions | awk '{$1=$1};1' | egrep "3\.\d+\.\d+$" | sort -V -r | head -n1)
 echo "Using Python ${python_version}"
 pyenv virtualenv ${python_version} ${envname}
 pyenv local ${envname}
 pip install --upgrade pip
 
+# NOTE: Not doing because now using this script to setup python for existing
+#       repositories that already have requirements files.
 # Default requirements.txt. Could use file at some point.
-echo -e "black\nmypy\ntqdm\nrich" > requirements.txt
-pip install -r requirements.txt
+# echo -e "black\nmypy\ntqdm\nrich" > requirements.txt
+# pip install -r requirements.txt
