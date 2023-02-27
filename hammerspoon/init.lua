@@ -58,8 +58,10 @@ require("common")
 -- I could probably auto-generate this from what I load...
 require("help")
 
--- E: Exists: Just sends a message if alive :-)
-require("exists")
+-- Old: E: Exists: Just sends a message if alive :-)
+-- New: E: Edit: Opens VS code to edit hammerspoon files
+-- require("exists")
+require("edit")
 
 -- C: Cleanup: Remove all spaces, close all apps and windows
 require("cleanup")
@@ -69,6 +71,9 @@ require("daily_note")
 
 -- A: Agenda: Dump in text of agenda to plan
 require("agenda")
+
+-- S: Schedules: Dump in text of schedules
+require("schedules")
 
 -- J: Japanese: Open study material, music, timer
 require("japanese")

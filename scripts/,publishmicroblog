@@ -1,0 +1,18 @@
+#!/bin/bash
+
+#
+# Publish microblog
+#
+
+cd ~/repos/website-3/
+
+# TODO: check current git status, e.g., simply
+# whether "to be committed" in it, and abort
+# if so
+
+git add posts/microblog/
+git add assets/microblog/
+git commit -m "microblog"
+git push origin
+
+cd -

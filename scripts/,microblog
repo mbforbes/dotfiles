@@ -1,0 +1,22 @@
+#!/bin/bash
+
+#
+# Make a new microblog entry.
+#
+
+dateTitle=$(date +'%Y%m%d%H%M%S')
+dateHeader=$(date +'%Y-%m-%d %H:%M:%S %z')
+path=~/repos/website-3/posts/microblog/${dateTitle}.md
+
+# from $dateHeader, trimming off minutes from time zone that
+# screws up eleventy/yaml or something (e.g., +0800 -> +08)
+cat > ${path} <<- EOF
+---
+title: ${dateTitle}
+date: ${dateHeader::${#dateHeader}-2}
+---
+
+EOF
+
+echo "Opening ${path}"
+code ${path}

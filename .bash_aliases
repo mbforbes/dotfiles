@@ -5,6 +5,7 @@ alias rebash='source ~/.bashrc'
 
 # general
 alias u='cd ..'
+alias ccat='pygmentize -g'
 
 # git
 alias gs='git status'

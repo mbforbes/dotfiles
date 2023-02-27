@@ -27,7 +27,9 @@ for img in "$@"; do
         exit 1
     fi
 
+    # TODO: fix naming (remove any extra .moz80 in there)
     base="${img%.*}"
     out="${base}-thumb.jpg"
-    convert "${img}" -sampling-factor 4:2:0 -strip -quality 95 -interlace JPEG -colorspace sRGB -resize 216x216 "${out}"
+    convert "${img}" -sampling-factor 4:2:0 -quality 100 -colorspace sRGB -resize 216x216 "${out}"
+    ,moz "${out}"
 done

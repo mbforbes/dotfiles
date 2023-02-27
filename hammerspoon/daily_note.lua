@@ -14,6 +14,6 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "D", function()
     hs.eventtap.keyStroke({"alt", "shift"}, ".")
 
     -- Close the main window so we can focus only on the note.
-    local mw = app:getWindow("Notes")
-    mw:close()
+    -- local mw = app:getWindow("Notes")
+    -- mw:close()
 end)

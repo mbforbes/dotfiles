@@ -1,0 +1,42 @@
+#!/bin/bash
+
+#
+# Make a new sketch, joining passed arguments as title.
+#
+
+# Settings from https://sipb.mit.edu/doc/safe-shell/
+# -e          = exit on error
+# -u          = unset is an error
+# -o pipefail = pipelines to produce a failure return code if any command errors;
+#               normally, pipelines only return a failure if the last command errors.
+set -eu -o pipefail
+
+title="$*"
+
+if [ ${#title} -eq 0 ]; then
+    echo "usage: ,sketch [Title of sketch]"
+    exit 1
+fi
+
+slug=$(,slugify $title)
+path=~/repos/website-3/posts/sketches/${slug}.md
+
+if [[ -f ${path} ]]; then
+    echo ",note: Error: File exits: ${path}"
+    exit 1
+fi
+
+d=$(date +"%Y-%m-%d")
+
+cat > ${path} <<- EOF
+---
+date: ${d}
+title: "Sketch: ${title}"
+image: /assets/sketches/XXX.moz80.jpg
+thumb: /assets/sketches/XXX-thumb.moz80.jpg
+---
+
+{% img "/assets/sketches/XXX.moz80.jpg" %}
+EOF
+
+code ${path}
