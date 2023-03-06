@@ -69,14 +69,23 @@ require("cleanup")
 -- D: Daily note: Create if needed and open it
 require("daily_note")
 
--- A: Agenda: Dump in text of agenda to plan
-require("agenda")
+-- A: Agenda A: Dump in text of agenda A
+require("agenda_a")
+
+-- B: Agenda B: Dump in text of agenda B
+require("agenda_b")
 
 -- S: Schedules: Dump in text of schedules
-require("schedules")
+-- require("schedules")
 
 -- J: Japanese: Open study material, music, timer
-require("japanese")
+-- require("japanese")
+
+-- L: Line: Paste a line
+require("line")
 
 -- I: Inboxes: Open inboxes, music, timer
 require("inboxes")
+
+-- T: Set timer 45m
+require("timer")

@@ -20,7 +20,6 @@ SCHEDULES_TEXT = hs.styledtext.getStyledTextFromData([[
 </ul>
 </ul>
 <br/>
-
 <p>7h day:</p>
 <ul>
 <li>8:30 &ndash; 12:30 &mdash; work [4h]</li>
@@ -44,7 +43,6 @@ SCHEDULES_TEXT = hs.styledtext.getStyledTextFromData([[
 </ul>
 </ul>
 <br/>
-
 <p>8h day:</p>
 <ul>
 <li>8:30 &ndash; 12:30 &mdash; work [4h]</li>

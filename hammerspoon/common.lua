@@ -40,3 +40,17 @@ function startTimer(minutes)
     hs.eventtap.keyStroke({}, 'space', pomo)
     hs.eventtap.keyStroke({'cmd'}, 'w', pomo)
 end
+
+function getKanjiDay()
+    kanji = {
+        "&#26085;", -- 日
+        "&#26376;", -- 月
+        "&#28779;", -- 火
+        "&#27700;", -- 水
+        "&#26408;", -- 木
+        "&#37329;", -- 金
+        "&#22303;", -- 土
+    }
+    -- lua dates: http://www.lua.org/pil/22.1.html
+    return kanji[os.date("%w") + 1]
+end

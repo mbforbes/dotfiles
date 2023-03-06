@@ -13,10 +13,10 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "H", function()
     hs.notify.new({
         title="Help: Installed Shortcuts (⌘⌥⌃)",
         informativeText=[[
-- H: Help           - A: Agenda
-- E: Exists         - J: Japanese
-- C: Cleanup     - S: Schedules
-- D: Daily note
+- H: Help           - A: Agenda A
+- E: Exists         - L: Line
+- C: Cleanup     - B: Agenda B
+- D: Daily note  - T: Timer 45m
 ]]
     }):send()
 end)
