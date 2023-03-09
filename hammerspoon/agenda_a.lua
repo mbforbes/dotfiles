@@ -13,7 +13,8 @@
 --
 -- <p>Not on agenda: exercise, food, projects, reading, explicit free time (or meditate).</p>
 
-AGENDA_A_TEXT = hs.styledtext.getStyledTextFromData([[
+function get_agenda_a_text()
+    return hs.styledtext.getStyledTextFromData([[
 <h2>]] .. os.date("%A") .. [[</h2>
 ]] .. os.date("%x") .. [[ (]] .. getKanjiDay() .. [[)<br/>
 <br/>
@@ -49,7 +50,19 @@ Inbox<br/>
 <br/>
 Website goal: <b>x</b><br/>
 <br/>
+Morning schedule:
+<ul>
+<li>8:30 &ndash; 9:15 &mdash; Genki [45m]</li>
+<li>9:15 &ndash; 9:40 &mdash; Breakfast [25m]</li>
+<li>9:40 &ndash; 10:25 &mdash; J Apps [45m]</li>
+<li>10:25 &ndash; 10:35 &mdash; Break [10m]</li>
+<li>10:35 &ndash; 11:30 &mdash; <b>Inbox</b> [55m]</li>
+<li>11:30 &ndash; 11:35 &mdash; Break [5m]</li>
+<li>11:35 &ndash; 12:30 &mdash; <b>Website</b> [55m]</li>
+</ul>
+<br>
 ]], "html")
+end
 
 -- Paste Multi-line String
 -- TODO: Why wasn't this in a clipboard util? I guess it's kinda broken?
@@ -60,7 +73,7 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "A", function()
     hs.pasteboard.writeAllData(tempClipboard, hs.pasteboard.readAllData(nil))
 
     -- load string into clipboard and paste
-    hs.pasteboard.writeObjects(AGENDA_A_TEXT)
+    hs.pasteboard.writeObjects(get_agenda_a_text())
     hs.eventtap.keyStroke({'cmd'}, 'v')
 
     -- recall clipboard data
