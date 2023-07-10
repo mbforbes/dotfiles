@@ -1,0 +1,14 @@
+#!/bin/bash
+
+#
+# Find WK id for kanji
+#
+
+if [[ $# -lt 1 ]]; then
+    echo "usage: ,wkid [kanji]"
+    exit 2
+fi
+
+url="https://www.wanikani.com/kanji/${1}"
+id=$(curl --silent $url | sed 's/</\n</g' | egrep "subject_id" | egrep -o "\d+")
+echo $id
