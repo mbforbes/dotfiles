@@ -1,0 +1,9 @@
+#!/bin/bash
+
+#
+# Quickly get LAN sharing website URL.
+#
+
+shareURL=$(ifconfig | grep 192 | cut -d' ' -f2)
+echo "http://${shareURL}:8080/"
+echo "(don't forget to turn off debug img names)"
