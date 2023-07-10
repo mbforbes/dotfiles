@@ -1,0 +1,25 @@
+#!/bin/bash
+
+#
+# Extrat dimensions from passed image.
+#
+
+# Settings from https://sipb.mit.edu/doc/safe-shell/
+# -e          = exit on error
+# -u          = unset is an error
+# -o pipefail = pipelines to produce a failure return code if any command errors;
+#               normally, pipelines only return a failure if the last command errors.
+set -eu -o pipefail
+
+# 1+ input filenames
+if [ ${#@} -eq 0 ]; then
+    echo "usage: ,dims image1 [image2 ...] [> locs.json]"
+    exit 1
+fi
+
+for f in "$@"; do
+    # thanks to https://www.askdavetaylor.com/can-i-analyze-exif-information-on-the-mac-os-x-command-line/
+    w=$(mdls "$f" | grep PixelWidth | awk '{print $3}')
+    h=$(mdls "$f" | grep PixelHeight | awk '{print $3}')
+    echo "$w x $h"
+done
