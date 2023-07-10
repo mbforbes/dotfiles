@@ -15,8 +15,8 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "H", function()
 --         informativeText=[[
 -- - H: Help           - A: Agenda A
 -- - E: Exists         - L: Line
--- - C: Cleanup     - B: Agenda B
--- - D: Daily note  - T: Timer 45m
+-- - C: Cleanup     - T +  <n>: Timer <n>m
+-- - D: Daily note  - Y: Show console
 -- ]]
 --     }):send()
 

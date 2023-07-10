@@ -6,40 +6,27 @@ function get_agenda_b_text()
 <h2>]] .. os.date("%A") .. [[</h2>
 ]] .. os.date("%x") .. [[ (]] .. getKanjiDay() .. [[)<br/>
 <br/>
-Work today: <b>travel planning, biz</b><br/>
-Travel today: <b>x</b><br/>
-Done @ <b>x</b><br/>
-<br/>
-Japanese<br/>
+Japanese upkeep:<br/>
 <ul>
-<li>j block 1: Genki</li>
-<li>
-    j block 2: apps
-    <ul>
-        <li>KW: new</li>
-        <li>KW: review</li>
-        <li>WK: review</li>
-        <li>WK: new</li>
-        <li>Anki: review</li>
-        <li>Anki: new</li>
-    </ul>
-</li>
+<li>KW: new</li>
+<li>KW: review</li>
+<li>WK: review</li>
+<li>Anki: review</li>
 </ul>
 <br/>
-Travel planning goal: <b>x</b><br/>
-Biz goal: <b>x</b><br/>
-<br/>
-Morning schedule:
+Inbox<br/>
 <ul>
-<li>8:30 &ndash; 9:15 &mdash; Genki [45m]</li>
-<li>9:15 &ndash; 9:40 &mdash; Breakfast [25m]</li>
-<li>9:40 &ndash; 10:25 &mdash; J Apps [45m]</li>
-<li>10:25 &ndash; 10:35 &mdash; Break [10m]</li>
-<li>10:35 &ndash; 11:30 &mdash; <b>Travel planning</b> [55m]</li>
-<li>11:30 &ndash; 11:35 &mdash; Break [5m]</li>
-<li>11:35 &ndash; 12:30 &mdash; <b>Biz</b> [55m]</li>
+<li>messages</li>
+<li>gmail</li>
+<li>messenger</li>
+<li>whatsapp</li>
+<li>slack</li>
+<li>things</li>
 </ul>
-<br>
+<br/>
+Exercise:<br/>
+<ul><li><b>???</b></li></ul>
+<br/>
 ]], "html")
 end
 

@@ -13,14 +13,28 @@
 --
 -- <p>Not on agenda: exercise, food, projects, reading, explicit free time (or meditate).</p>
 
+-- Some deprecated parts, may want to introduce again:
+--
+-- Work today: <b>inbox, travel planning, website</b><br/>
+-- Travel today: <b>x</b><br/>
+-- Done @ <b>x</b><br/>
+--
+-- Morning schedule:
+-- <ul>
+-- <li>8:30 &ndash; 9:15 &mdash; Genki [45m]</li>
+-- <li>9:15 &ndash; 9:40 &mdash; Breakfast [25m]</li>
+-- <li>9:40 &ndash; 10:25 &mdash; J Apps [45m]</li>
+-- <li>10:25 &ndash; 10:35 &mdash; Break [10m]</li>
+-- <li>10:35 &ndash; 11:30 &mdash; <b>Inbox</b> [55m]</li>
+-- <li>11:30 &ndash; 11:35 &mdash; Break [5m]</li>
+-- <li>11:35 &ndash; 12:30 &mdash; <b>Website</b> [55m]</li>
+-- </ul>
+-- <br>
+
 function get_agenda_a_text()
     return hs.styledtext.getStyledTextFromData([[
 <h2>]] .. os.date("%A") .. [[</h2>
 ]] .. os.date("%x") .. [[ (]] .. getKanjiDay() .. [[)<br/>
-<br/>
-Work today: <b>inbox, website</b><br/>
-Travel today: <b>x</b><br/>
-Done @ <b>x</b><br/>
 <br/>
 Japanese<br/>
 <ul>
@@ -48,19 +62,15 @@ Inbox<br/>
 <li>things</li>
 </ul>
 <br/>
-Website goal: <b>x</b><br/>
+Travel planning goal:<br/>
+<ul><li><b>???</b></li></ul>
 <br/>
-Morning schedule:
-<ul>
-<li>8:30 &ndash; 9:15 &mdash; Genki [45m]</li>
-<li>9:15 &ndash; 9:40 &mdash; Breakfast [25m]</li>
-<li>9:40 &ndash; 10:25 &mdash; J Apps [45m]</li>
-<li>10:25 &ndash; 10:35 &mdash; Break [10m]</li>
-<li>10:35 &ndash; 11:30 &mdash; <b>Inbox</b> [55m]</li>
-<li>11:30 &ndash; 11:35 &mdash; Break [5m]</li>
-<li>11:35 &ndash; 12:30 &mdash; <b>Website</b> [55m]</li>
-</ul>
-<br>
+Exercise:<br/>
+<ul><li><b>???</b></li></ul>
+<br/>
+Work goal:<br/>
+<ul><li><b>???</b></li></ul>
+<br/>
 ]], "html")
 end
 
@@ -68,6 +78,7 @@ end
 -- TODO: Why wasn't this in a clipboard util? I guess it's kinda broken?
 hs.hotkey.bind({"cmd", "alt", "ctrl"}, "A", function()
     hs.notify.new({title="Running Agenda A", informativeText="🗓"}):send()
+    print("Running Agenda A")
     -- save clipboard data to temp
     tempClipboard = hs.pasteboard.uniquePasteboard()
     hs.pasteboard.writeAllData(tempClipboard, hs.pasteboard.readAllData(nil))

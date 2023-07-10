@@ -87,5 +87,8 @@ require("line")
 -- I: Inboxes: Open inboxes, music, timer
 require("inboxes")
 
--- T: Set timer 45m
+-- T: Set timer, press key to pick minutes
 require("timer")
+
+-- Y: Show/hide console (for seeing when timers set)
+require("show_console")
