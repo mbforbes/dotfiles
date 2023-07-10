@@ -1,0 +1,45 @@
+#!/bin/bash
+
+#
+# Find WK vocab page
+#
+# 練習する
+
+# TODO use getopts check for "-n" (or something) to not do
+# kanji lookup.
+
+if [[ $# -ne 1 ]]; then
+    echo "usage: ,wk 単語"
+    exit 2
+fi
+
+vocab=$1
+
+wk_lookup_open () {
+    # args:
+    # 1. "kanji" or "vocabulary"
+    # 2. the thing to look up
+
+    url="https://www.wanikani.com/${1}/${2}"
+    code=$(curl --write-out %{http_code} --silent --output /dev/null $url)
+    if [[ $code == "200" ]]; then
+        echo "$1/$2 - found, opening";
+        open $url
+        return 0
+    else
+        echo "$1/$2 - doesn't exist";
+        return 1
+    fi
+}
+
+wk_lookup_open vocabulary $1
+
+# look up characters if we didn't find the vocab
+if [[ $? -ne 0 ]]; then
+    # loops through multi-byte utf-8 characters.
+    echo "$vocab" | fold -w1 | while read -r char; do
+        if [[ $char != "" ]]; then
+            wk_lookup_open kanji $char
+        fi
+    done
+fi
