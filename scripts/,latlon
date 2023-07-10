@@ -1,0 +1,24 @@
+#!/bin/bash
+
+#
+# Quickly look up a location's (lat, lon).
+#
+
+# Settings from https://sipb.mit.edu/doc/safe-shell/
+# -e          = exit on error
+# -u          = unset is an error
+# -o pipefail = pipelines to produce a failure return code if any command errors;
+#               normally, pipelines only return a failure if the last command errors.
+set -eu -o pipefail
+
+place="$*"
+
+if [ ${#place} -eq 0 ]; then
+    echo "usage: ,latlon [place name]"
+    exit 1
+fi
+
+# this works for picking python version. had been testing using os.environ['VIRTUAL_ENV']
+# which kept saying the venv of the directory i was calling the script from. but in fact
+# it was using the version specified here. (confirmed w/ imports.)
+PYENV_VERSION="shell" python ~/repos/dotfiles/scripts/latlon.py ${place}
