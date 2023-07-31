@@ -19,22 +19,29 @@
 -- Travel today: <b>x</b><br/>
 -- Done @ <b>x</b><br/>
 --
--- Morning schedule:
+-- Schedule:
 -- <ul>
--- <li>8:30 &ndash; 9:15 &mdash; Genki [45m]</li>
--- <li>9:15 &ndash; 9:40 &mdash; Breakfast [25m]</li>
--- <li>9:40 &ndash; 10:25 &mdash; J Apps [45m]</li>
--- <li>10:25 &ndash; 10:35 &mdash; Break [10m]</li>
--- <li>10:35 &ndash; 11:30 &mdash; <b>Inbox</b> [55m]</li>
--- <li>11:30 &ndash; 11:35 &mdash; Break [5m]</li>
--- <li>11:35 &ndash; 12:30 &mdash; <b>Website</b> [55m]</li>
+-- <li><b>8:00 &ndash; 8:30 AM</b>: wakeup, coffee, set work goals</li>
+-- <li><b>8:30 &ndash; 12:30 PM</b>: work block 1 (4h) (incl. breakfast break, limit 30m!)</li>
+-- <li><b>12:30 &ndash; 2:00 PM</b>: midday break: exercise (30m), lunch break (1h)</li>
+-- <li><b>2:00 &ndash; 3:00 PM</b>: Japanese study time</li>
+-- <li><b>3:00 &ndash; 4:00 PM</b>: admin (inboxes; Things (travel / life / logistics))</li>
+-- <li><b>4:00 &ndash; 6:00 PM</b>: work block 2 (2h)</li>
+-- <li><b>6:00 &ndash; 7:00 PM</b>: project time (1h)</li>
 -- </ul>
 -- <br>
 
 function get_agenda_a_text()
     return hs.styledtext.getStyledTextFromData([[
+<br><br>
 <h2>]] .. os.date("%A") .. [[</h2>
 ]] .. os.date("%x") .. [[ (]] .. getKanjiDay() .. [[)<br/>
+<br/>
+Work goal(s)<br/>
+<ul><li>???</li></ul>
+<br/>
+Exercise today<br/>
+<ul><li>???</li></ul>
 <br/>
 Japanese<br/>
 <ul>
@@ -52,7 +59,7 @@ Japanese<br/>
 </li>
 </ul>
 <br/>
-Inbox<br/>
+Admin<br/>
 <ul>
 <li>messages</li>
 <li>gmail</li>
@@ -62,15 +69,19 @@ Inbox<br/>
 <li>things</li>
 </ul>
 <br/>
-Travel planning goal:<br/>
-<ul><li><b>???</b></li></ul>
-<br/>
-Exercise:<br/>
-<ul><li><b>???</b></li></ul>
-<br/>
-Work goal:<br/>
-<ul><li><b>???</b></li></ul>
-<br/>
+Schedule
+<ul>
+<li><b>8:00 &ndash; 8:30 AM</b>: wakeup, coffee, set work goals</li>
+<li><b>8:30 &ndash; 12:30 PM</b>: work block 1 (4h) (incl. breakfast break, limit 30m!)</li>
+<li><b>12:30 &ndash; 2:00 PM</b>: midday break: exercise (30m), lunch break (1h)</li>
+<li><b>2:00 &ndash; 3:00 PM</b>: Japanese study time</li>
+<li><b>3:00 &ndash; 4:00 PM</b>: admin (inboxes; Things (travel / life / logistics))</li>
+<li><b>4:00 &ndash; 6:00 PM</b>: work block 2 (2h)</li>
+<li><b>6:00 &ndash; 7:00 PM</b>: project time (1h)</li>
+</ul>
+<br>
+Notes
+<br>
 ]], "html")
 end
 
@@ -83,6 +94,10 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "A", function()
     tempClipboard = hs.pasteboard.uniquePasteboard()
     hs.pasteboard.writeAllData(tempClipboard, hs.pasteboard.readAllData(nil))
 
+    -- copied from line.lua
+    hs.pasteboard.writeObjects(hs.image.imageFromPath("~/GoogleDrive/images/misc/gray-line.png"))
+    hs.eventtap.keyStroke({'cmd'}, 'v')
+
     -- load string into clipboard and paste
     hs.pasteboard.writeObjects(get_agenda_a_text())
     hs.eventtap.keyStroke({'cmd'}, 'v')
@@ -90,6 +105,9 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "A", function()
     -- recall clipboard data
     hs.pasteboard.writeAllData(nil, hs.pasteboard.readAllData(tempClipboard))
     hs.pasteboard.deletePasteboard(tempClipboard)
+
+    -- move back up to top (shifting down for some reason)
+    hs.eventtap.keyStroke({'cmd'}, 'up')
 end)
 
 -- Just add to Things via Apple Shortcut

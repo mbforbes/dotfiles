@@ -4,7 +4,7 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "L", function()
     tempClipboard = hs.pasteboard.uniquePasteboard()
     hs.pasteboard.writeAllData(tempClipboard, hs.pasteboard.readAllData(nil))
 
-    -- load string into clipboard and paste
+    -- load image into clipboard and paste
     hs.pasteboard.writeObjects(hs.image.imageFromPath("~/GoogleDrive/images/misc/gray-line.png"))
     hs.eventtap.keyStroke({'cmd'}, 'v')
 
